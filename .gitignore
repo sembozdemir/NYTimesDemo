@@ -1,0 +1,30 @@
+# Android Studio
+.idea/
+*.iml
+
+# Mac File Store
+.DS_Store
+
+# Generated Files
+build/
+*/build
+config/
+
+# Gradle Files
+.gradle/
+
+# Log Files
+.log
+
+# Porperties Files
+local.properties
+
+# Lint files
+*/lint.xml
+
+# .apk / .aab
+*.apk
+*.aab
+output.json
+/app/prod/release/output.json
+/app/release/prod/release/app.aab
