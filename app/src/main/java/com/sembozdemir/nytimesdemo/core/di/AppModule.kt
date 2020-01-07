@@ -2,6 +2,7 @@ package com.sembozdemir.nytimesdemo.core.di
 
 import android.content.Context
 import com.sembozdemir.nytimesdemo.App
+import com.sembozdemir.nytimesdemo.core.network.NetworkModule
 import dagger.Module
 import dagger.Provides
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,7 +12,8 @@ import javax.inject.Singleton
     includes = [
         AndroidSupportInjectionModule::class,
         ActivityBuilderModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        NetworkModule::class
     ]
 )
 class AppModule {

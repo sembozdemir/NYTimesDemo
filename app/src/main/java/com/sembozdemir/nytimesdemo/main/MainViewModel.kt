@@ -25,7 +25,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 try {
-                    val data = repository.fetchSomething()
+                    val data = repository.fetchMostViewed()
                     mutableState.postValue(MainState.Success(data))
                 } catch (e: Exception) {
                     Timber.e(e)

@@ -1,11 +1,22 @@
 package com.sembozdemir.nytimesdemo.main
 
+import com.sembozdemir.nytimesdemo.core.network.NytApi
 import javax.inject.Inject
 
-class MainRepository @Inject constructor() {
+class MainRepository @Inject constructor(
+    private val api: NytApi,
+    private val mapper: NewsItemMapper
+) {
 
-    // TODO: make something useful
-    fun fetchSomething(): List<String> {
-        return listOf("First", "Second", "Third")
+    suspend fun fetchMostViewed(): List<NewsItem> {
+
+        val response = api.fetchMostViewed()
+
+        if (response.isSuccessful) {
+            val nytResponse = response.body()
+            return nytResponse?.results?.map { mapper.map(it) }.orEmpty()
+        }
+
+        return emptyList()
     }
 }

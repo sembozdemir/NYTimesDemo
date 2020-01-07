@@ -25,6 +25,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -55,4 +59,10 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
     implementation 'io.coil-kt:coil:0.6.1'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation "com.squareup.retrofit2:converter-moshi:2.6.1"
+    implementation 'com.squareup.moshi:moshi:1.8.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 }
