@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space_regular"
+    android:layout_marginEnd="@dimen/space_regular"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/light_grey"
+    app:cardCornerRadius="@dimen/space_medium"
+    app:cardElevation="@dimen/space_medium">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/newsItemImageView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_image_banner_height"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/newsItemTextViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginEnd="@dimen/space_default"
+            android:textAppearance="@style/TextStyle.24.Bold"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/newsItemImageView"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/newsItemTextViewAbstract"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginEnd="@dimen/space_default"
+            android:textAppearance="@style/TextStyle.18"
+            android:textColor="@color/dark_grey"
+            app:layout_constraintTop_toBottomOf="@+id/newsItemTextViewTitle"
+            tools:text="Abstract Summary etc." />
+
+        <TextView
+            android:id="@+id/newsItemTextViewPublisher"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginBottom="@dimen/space_default"
+            android:textAppearance="@style/TextStyle.14"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/newsItemTextViewDate"
+            app:layout_constraintTop_toBottomOf="@+id/newsItemTextViewAbstract"
+            tools:text="New York Times New York Times New York Times" />
+
+        <TextView
+            android:id="@+id/newsItemTextViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_default"
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginEnd="@dimen/space_default"
+            android:layout_marginBottom="@dimen/space_default"
+            android:textAppearance="@style/TextStyle.14"
+            android:textColor="@color/grey"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/newsItemTextViewPublisher"
+            app:layout_constraintTop_toBottomOf="@+id/newsItemTextViewAbstract"
+            tools:text="1 day ago" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

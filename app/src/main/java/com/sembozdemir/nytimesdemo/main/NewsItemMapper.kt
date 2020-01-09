@@ -1,5 +1,6 @@
 package com.sembozdemir.nytimesdemo.main
 
+import com.sembozdemir.nytimesdemo.core.extensions.orZero
 import com.sembozdemir.nytimesdemo.core.network.model.ResultsItem
 import javax.inject.Inject
 
@@ -17,6 +18,7 @@ class NewsItemMapper @Inject constructor() {
             ?: resultsItem?.source.orEmpty()
 
         return NewsItem(
+            id = resultsItem?.id.orZero(),
             url = resultsItem?.url.orEmpty(),
             bannerUrl = bannerUrl,
             title = resultsItem?.title.orEmpty(),

@@ -18,8 +18,7 @@ class MainViewModel @Inject constructor(
 
     private val mutableState: MutableLiveData<MainState> = MutableLiveData()
 
-    // TODO: make something useful
-    fun fetchSomething() {
+    fun fetchMostViewed() {
         mutableState.postValue(MainState.Loading)
 
         viewModelScope.launch {
@@ -33,6 +32,10 @@ class MainViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun onNewsItemClick(item: NewsItem) {
+        // TODO: handle click event
     }
 
 }

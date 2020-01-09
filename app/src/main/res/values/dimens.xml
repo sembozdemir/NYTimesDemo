@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="space_huge">72dp</dimen>
+    <dimen name="space_xxxlarge">56dp</dimen>
+    <dimen name="space_xxlarge">48dp</dimen>
+    <dimen name="space_xlarge">32dp</dimen>
+    <dimen name="space_large">24dp</dimen>
+    <dimen name="space_default">16dp</dimen>
+    <dimen name="space_regular">12dp</dimen>
+    <dimen name="space_medium">8dp</dimen>
+    <dimen name="space_small">4dp</dimen>
+    <dimen name="space_tiny">2dp</dimen>
+
+    <dimen name="list_item_image_banner_height">240dp</dimen>
+</resources>

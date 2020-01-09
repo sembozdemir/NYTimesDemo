@@ -4,9 +4,6 @@ import com.squareup.moshi.Json
 
 data class ResultsItem(
 
-    @field:Json(name = "column")
-    val column: Any? = null,
-
     @field:Json(name = "section")
     val section: String? = null,
 
