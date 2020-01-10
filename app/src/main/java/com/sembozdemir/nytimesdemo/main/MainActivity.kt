@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sembozdemir.nytimesdemo.R
 import com.sembozdemir.nytimesdemo.core.base.BaseActivity
+import com.sembozdemir.nytimesdemo.core.extensions.customTab
 import com.sembozdemir.nytimesdemo.util.VerticalSpacingItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
@@ -27,6 +28,8 @@ class MainActivity : BaseActivity<MainViewModel>() {
         setupSwipeToRefresh()
 
         observeState()
+
+        observeNavigationEvent()
 
         viewModel.fetchMostViewed()
     }
@@ -68,6 +71,12 @@ class MainActivity : BaseActivity<MainViewModel>() {
                     }
                 }
             }
+        })
+    }
+
+    private fun observeNavigationEvent() {
+        viewModel.navigateToDetailEvent.observe(this, Observer { url ->
+            customTab(url)
         })
     }
 }

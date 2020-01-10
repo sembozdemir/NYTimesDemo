@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sembozdemir.nytimesdemo.core.base.BaseViewModel
+import com.sembozdemir.nytimesdemo.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -17,6 +18,11 @@ class MainViewModel @Inject constructor(
     val state: LiveData<MainState> get() = mutableState
 
     private val mutableState: MutableLiveData<MainState> = MutableLiveData()
+
+    val navigateToDetailEvent: LiveData<String>
+        get() = mutableNavigateToDetailEvent
+
+    private val mutableNavigateToDetailEvent = SingleLiveEvent<String>()
 
     fun fetchMostViewed() {
         mutableState.postValue(MainState.Loading)
@@ -35,7 +41,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun onNewsItemClick(item: NewsItem) {
-        // TODO: handle click event
+        mutableNavigateToDetailEvent.postValue(item.url)
     }
 
 }
