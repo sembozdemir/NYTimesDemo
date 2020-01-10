@@ -8,6 +8,7 @@ class MainRepository @Inject constructor(
     private val mapper: NewsItemMapper
 ) {
 
+    @Throws(Exception::class)
     suspend fun fetchMostViewed(): List<NewsItem> {
 
         val response = api.fetchMostViewed()

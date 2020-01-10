@@ -26,9 +26,8 @@ class MainViewModel @Inject constructor(
     private val mutableNavigateToDetailEvent = SingleLiveEvent<String>()
 
     fun fetchMostViewed() {
-        mutableState.postValue(MainState.Loading)
-
         viewModelScope.launch(Dispatchers.IO) {
+            mutableState.postValue(MainState.Loading)
             try {
                 val data = repository.fetchMostViewed()
                 if (data.isEmpty()) {
