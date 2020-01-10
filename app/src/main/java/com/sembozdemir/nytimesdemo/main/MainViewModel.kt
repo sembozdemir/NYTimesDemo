@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sembozdemir.nytimesdemo.core.base.BaseViewModel
+import com.sembozdemir.nytimesdemo.util.ErrorHandler
 import com.sembozdemir.nytimesdemo.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-    private val repository: MainRepository
+    private val repository: MainRepository,
+    private val errorHandler: ErrorHandler
 ) : BaseViewModel() {
 
     val state: LiveData<MainState> get() = mutableState
@@ -27,15 +28,17 @@ class MainViewModel @Inject constructor(
     fun fetchMostViewed() {
         mutableState.postValue(MainState.Loading)
 
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    val data = repository.fetchMostViewed()
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val data = repository.fetchMostViewed()
+                if (data.isEmpty()) {
+                    mutableState.postValue(MainState.Error(errorHandler.getEmptyResponseMessage()))
+                } else {
                     mutableState.postValue(MainState.Success(data))
-                } catch (e: Exception) {
-                    Timber.e(e)
-                    mutableState.postValue(MainState.Error("Something went wrong"))
                 }
+            } catch (e: Exception) {
+                Timber.e(e)
+                mutableState.postValue(MainState.Error(errorHandler.getPrettyMessage(e)))
             }
         }
     }
