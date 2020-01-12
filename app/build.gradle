@@ -8,6 +8,13 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'jacoco'
 
+def _String = "String"
+def _string = "string"
+def APP_NAME = "app_name"
+def NY_TIMES_API_KEY_NAME = "NYT_API_KEY"
+def NY_TIMES_API_KEY_DEV = $/"U4tJnG43prjVeuWBRsVFnNYaofhMa2nt"/$
+def NY_TIMES_API_KEY_PROD = $/"NwOZOLuAeAGH70Wm5q3oGno550zqNags"/$
+
 jacoco {
     toolVersion = '0.8.5'
 }
@@ -27,10 +34,42 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            keyAlias 'android'
+            keyPassword 'android'
+            storeFile file('release.keystore')
+            storePassword 'android'
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            dimension "default"
+            applicationIdSuffix '.dev'
+            resValue _string, APP_NAME, "NYTimes Dev"
+            buildConfigField _String, NY_TIMES_API_KEY_NAME, NY_TIMES_API_KEY_DEV
+        }
+        prod {
+            dimension "default"
+            resValue _string, APP_NAME, "NyTimes"
+            buildConfigField _String, NY_TIMES_API_KEY_NAME, NY_TIMES_API_KEY_PROD
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            zipAlignEnabled true
+        }
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     kotlinOptions {

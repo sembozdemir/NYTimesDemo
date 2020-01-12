@@ -12,7 +12,6 @@ import retrofit2.create
 import javax.inject.Singleton
 
 private const val NYT_API_BASE_URL = "https://api.nytimes.com"
-private const val API_KEY = "NwOZOLuAeAGH70Wm5q3oGno550zqNags"
 
 @Module
 class NetworkModule {
@@ -24,17 +23,19 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideApiKeyInterceptor(): ApiKeyInterceptor = ApiKeyInterceptor(BuildConfig.NYT_API_KEY)
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor,
+        apiKeyInterceptor: ApiKeyInterceptor
+    ): OkHttpClient {
         val okHttpBuilder = OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
 
         if (BuildConfig.DEBUG) {
             okHttpBuilder.addInterceptor(loggingInterceptor)
-        }
-
-        okHttpBuilder.addInterceptor { chain ->
-            val req = chain.request()
-            val url = req.url().newBuilder().addQueryParameter("api-key", API_KEY).build()
-            chain.proceed(req.newBuilder().url(url).build())
         }
 
         return okHttpBuilder.build()
