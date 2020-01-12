@@ -28,3 +28,4 @@ local.properties
 output.json
 /app/prod/release/output.json
 /app/release/prod/release/app.aab
+/.gradletasknamecache
